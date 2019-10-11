@@ -1,1 +1,6 @@
 <%= javascript_pack_tag 'eventlite' %>
+
+<%= content_tag :div,
+  id: "events_data",
+  data: @events.to_json do %>
+<% end %>
