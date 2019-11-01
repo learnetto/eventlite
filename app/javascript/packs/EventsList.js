@@ -2,9 +2,9 @@ import React from 'react'
 
 const EventsList = props => (
   <div>
-    {props.events.map(function(e){
+    {props.events.map(function(e, i){
       return(
-        <div className="event">{e.title}</div>
+        <div key ={i} className="event">{e.title}</div>
       )
     })}
   </div>
