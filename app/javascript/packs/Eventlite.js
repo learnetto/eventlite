@@ -1,14 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import PropTypes from 'prop-types'
+
+import EventsList from './EventsList'
 
 const Eventlite = props => (
   <div>
-    {props.events.map(function(e){
-      return(
-        <div className="event">{e.title}</div>
-      )
-    })}
+    <EventsList events={props.events} />
   </div>
 )
 
