@@ -4,10 +4,9 @@ import PropTypes from 'prop-types'
 
 const Eventlite = props => (
   <div>
-    <h1>Eventlite</h1>
     {props.events.map(function(e){
       return(
-        <p>{e.title}</p>
+        <div className="event">{e.title}</div>
       )
     })}
   </div>
