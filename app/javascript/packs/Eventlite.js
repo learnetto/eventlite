@@ -5,11 +5,18 @@ import EventsList from './EventsList'
 import EventForm from './EventForm'
 
 class Eventlite extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      events: this.props.events
+    }
+  }
+
   render() {
     return (
       <div>
         <EventForm />
-        <EventsList events={this.props.events} />
+        <EventsList events={this.state.events} />
       </div>
     )
   }
