@@ -4,12 +4,16 @@ import ReactDOM from 'react-dom'
 import EventsList from './EventsList'
 import EventForm from './EventForm'
 
-const Eventlite = props => (
-  <div>
-    <EventForm />
-    <EventsList events={props.events} />
-  </div>
-)
+class Eventlite extends React.Component {
+  render() {
+    return (
+      <div>
+        <EventForm />
+        <EventsList events={this.props.events} />
+      </div>
+    )
+  }
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   const node = document.getElementById('events_data')
