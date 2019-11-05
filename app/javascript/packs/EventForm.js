@@ -13,6 +13,7 @@ class EventForm extends React.Component {
   }
 
   handleSubmit = e => {
+    const handleNewEvent = this.props.handleNewEvent
     axios({
       method: 'POST',
       url: '/events',
@@ -22,7 +23,7 @@ class EventForm extends React.Component {
       }
     })
     .then(function (response) {
-      console.log(response)
+      handleNewEvent(response.data)
     })
     .catch(function (error) {
       console.log(error)
