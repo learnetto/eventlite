@@ -26,10 +26,11 @@ class Eventlite extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault()
+    let newEvent = { title: this.state.title, start_datetime: this.state.start_datetime, location: this.state.location }
     axios({
       method: 'POST',
       url: '/events',
-      data: { event: this.state },
+      data: { event: newEvent },
       headers: {
         'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
       }
