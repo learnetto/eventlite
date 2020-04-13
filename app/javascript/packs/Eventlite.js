@@ -37,13 +37,18 @@ class Eventlite extends React.Component {
         'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
       }
     })
-    .then(function (response) {
+    .then((response) => {
       this.addNewEvent(response.data)
-    }.bind(this))
-    .catch(function (error) {
+      this.resetFormErrors();
+    })
+    .catch((error) => {
       console.log(error.response.data)
       this.setState({formErrors: error.response.data})
-    }.bind(this))
+    })
+  }
+
+  resetFormErrors () {
+    this.setState({formErrors: {}})
   }
 
   addNewEvent = (event) => {
