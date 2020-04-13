@@ -4,6 +4,7 @@ import axios from 'axios'
 
 import EventsList from './EventsList'
 import EventForm from './EventForm'
+import FormErrors from './FormErrors'
 
 class Eventlite extends React.Component {
   constructor(props) {
@@ -55,7 +56,7 @@ class Eventlite extends React.Component {
   render() {
     return (
       <div>
-        <p>Title {this.state.formErrors.title}</p>
+        <FormErrors formErrors = {this.state.formErrors} />
         <EventForm handleSubmit = {this.handleSubmit}
           handleInput = {this.handleInput}
           title = {this.state.title}
