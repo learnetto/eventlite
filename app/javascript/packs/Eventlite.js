@@ -14,7 +14,8 @@ class Eventlite extends React.Component {
       title: '',
       start_datetime: '',
       location: '',
-      formErrors: {}
+      formErrors: {},
+      formValid: false
     }
   }
 
@@ -64,6 +65,7 @@ class Eventlite extends React.Component {
         <FormErrors formErrors = {this.state.formErrors} />
         <EventForm handleSubmit = {this.handleSubmit}
           handleInput = {this.handleInput}
+          formValid={this.state.formValid}
           title = {this.state.title}
           start_datetime = {this.state.start_datetime}
           location = {this.state.location} />
