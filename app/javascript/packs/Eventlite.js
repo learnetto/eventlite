@@ -24,7 +24,7 @@ class Eventlite extends React.Component {
     const name = e.target.name
     const newState = {}
     newState[name] = e.target.value
-    this.setState(newState)
+    this.setState(newState, this.validateForm)
   }
 
   handleSubmit = e => {
@@ -46,6 +46,12 @@ class Eventlite extends React.Component {
       console.log(error.response.data)
       this.setState({formErrors: error.response.data})
     })
+  }
+
+  validateForm() {
+    this.setState({formValid: this.state.location.trim().length > 0 &&
+                              this.state.title.trim().length > 2 &&
+                              Date.parse(this.state.start_datetime) > Date.now()})
   }
 
   resetFormErrors () {
