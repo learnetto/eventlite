@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import axios from 'axios'
+import validations from '../validations'
 
 import EventsList from './EventsList'
 import EventForm from './EventForm'
@@ -52,34 +53,35 @@ class Eventlite extends React.Component {
   validateField(fieldName, fieldValue) {
     let fieldValid = true
     let errors = []
+    let fieldError = ''
     switch(fieldName) {
       case 'title':
-      if(fieldValue.length <= 2) {
-        errors = errors.concat(["is too short (minimum is 3 characters)"])
-        fieldValid = false
+      [fieldValid, fieldError] = validations.checkMinLength(fieldValue, 3)
+      if(!fieldValid) {
+        errors = errors.concat([fieldError])
       }
-      break;
+      break
 
       case 'location':
-      if(fieldValue.length === 0) {
-        errors = errors.concat(["can't be blank"])
-        fieldValid = false
+      [fieldValid, fieldError] = validations.checkMinLength(fieldValue, 1)
+      if(!fieldValid) {
+        errors = errors.concat([fieldError])
       }
-      break;
+      break
 
       case 'start_datetime':
-      if(fieldValue.length === 0) {
-        errors = errors.concat(["can't be blank"])
-        fieldValid = false
-      } else if(Date.parse(fieldValue) <= Date.now()) {
-        errors = errors.concat(["can't be in the past"])
-        fieldValid = false
+      [fieldValid, fieldError] = validations.checkMinLength(fieldValue, 1)
+      if(!fieldValid) {
+        errors = errors.concat([fieldError])
       }
-      break;
+      [fieldValid, fieldError] = validations.timeShouldBeInTheFuture(fieldValue)
+      if(!fieldValid) {
+        errors = errors.concat([fieldError])
+      }
+      break
     }
     const newState = {formErrors: {...this.state.formErrors, [fieldName]: errors}}
     newState[fieldName] = {...this.state[fieldName], valid: fieldValid}
-    console.log(newState)
     this.setState(newState, this.validateForm)
   }
 
