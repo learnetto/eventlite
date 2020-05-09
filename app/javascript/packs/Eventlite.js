@@ -20,13 +20,26 @@ class Eventlite extends React.Component {
     }
   }
 
+  static formValidations = {
+    title: [
+      (value) => { return(validations.checkMinLength(value, 3)) }
+    ],
+    start_datetime: [
+      (value) => { return(validations.checkMinLength(value, 1)) },
+      (value) => { return(validations.timeShouldBeInTheFuture(value)) }
+    ],
+    location: [
+      (value) => { return(validations.checkMinLength(value, 1)) }
+    ]
+  }
+
   handleInput = e => {
     e.preventDefault()
     const name = e.target.name
     const value = e.target.value
     const newState = {}
     newState[name] = {...this.state[name], value: value}
-    this.setState(newState, () => this.validateField(name, value))
+    this.setState(newState, () => this.validateField(name, value, Eventlite.formValidations[name]))
   }
 
   handleSubmit = e => {
@@ -50,36 +63,18 @@ class Eventlite extends React.Component {
     })
   }
 
-  validateField(fieldName, fieldValue) {
+  validateField(fieldName, fieldValue, fieldValidations) {
     let fieldValid = true
-    let errors = []
-    let fieldError = ''
-    switch(fieldName) {
-      case 'title':
-      [fieldValid, fieldError] = validations.checkMinLength(fieldValue, 3)
-      if(!fieldValid) {
+    let errors = fieldValidations.reduce((errors, validation) => {
+      let [valid, fieldError] = validation(fieldValue)
+      if(!valid) {
         errors = errors.concat([fieldError])
       }
-      break
+      return(errors);
+    }, []);
 
-      case 'location':
-      [fieldValid, fieldError] = validations.checkMinLength(fieldValue, 1)
-      if(!fieldValid) {
-        errors = errors.concat([fieldError])
-      }
-      break
+    fieldValid = errors.length === 0
 
-      case 'start_datetime':
-      [fieldValid, fieldError] = validations.checkMinLength(fieldValue, 1)
-      if(!fieldValid) {
-        errors = errors.concat([fieldError])
-      }
-      [fieldValid, fieldError] = validations.timeShouldBeInTheFuture(fieldValue)
-      if(!fieldValid) {
-        errors = errors.concat([fieldError])
-      }
-      break
-    }
     const newState = {formErrors: {...this.state.formErrors, [fieldName]: errors}}
     newState[fieldName] = {...this.state[fieldName], valid: fieldValid}
     this.setState(newState, this.validateForm)
