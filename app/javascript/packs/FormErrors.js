@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const FormErrors = (props) =>
   <div>
@@ -12,5 +13,9 @@ const FormErrors = (props) =>
       )
     })}
   </div>
+
+FormErrors.propTypes = {
+  formErrors: PropTypes.object
+}
 
 export default FormErrors
