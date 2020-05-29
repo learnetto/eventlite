@@ -8,6 +8,8 @@ gem 'rails', '6.0.1'
 
 gem 'rack-cors'
 
+gem 'devise'
+
 # Use Puma as the app server
 
 group :production do
