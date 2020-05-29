@@ -9,6 +9,7 @@ gem 'rails', '6.0.1'
 gem 'rack-cors'
 
 gem 'devise'
+gem 'devise_token_auth'
 
 # Use Puma as the app server
 
