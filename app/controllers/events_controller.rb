@@ -28,6 +28,15 @@ class EventsController < ApplicationController
     end
   end
 
+  def destroy
+    @event = Event.find(params[:id])
+    if @event.destroy
+      head :no_content, status: :ok
+    else
+      render json: @event.errors, status: :unprocessable_entity
+    end
+  end
+
   private
   def event_params
     params.require(:event).permit(:title, :start_datetime, :location)
