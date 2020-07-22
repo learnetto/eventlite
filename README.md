@@ -1,24 +1,25 @@
-# README
+# Eventlite Backend Ruby on Rails App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is an Eventbrite clone, built as part of [The Complete React on Rails course](https://learnetto.com/users/hrishio/courses/react-rails-course) on [Learnetto](https://learnetto.com) by Hrishi Mittal.
 
-Things you may want to cover:
+This app provides a full-stack Rails app and the backend Rails API for the [frontend React user interface](https://github.com/learnetto/eventlite-frontend).
 
-* Ruby version
+## How to run
 
-* System dependencies
+First, install all the gems:
 
-* Configuration
+```
+$ bundle
+```
 
-* Database creation
+Set up the database:
 
-* Database initialization
+```
+$ rake db:migrate
+```
 
-* How to run the test suite
+Start the Rails server on port 3000.
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```
+$ rails start
+```
